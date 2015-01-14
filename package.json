@@ -1,0 +1,16 @@
+{
+  "name": "diagrams",
+  "version": "0.0.1",
+  "description": "A simple command line tool to create diagrams",
+  "main": "diagrams.js",
+  "dependencies": {
+    "websequencediagrams": "^0.0.2",
+    "async": "^0.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Florian Schmidt",
+  "license": "none"
+}
