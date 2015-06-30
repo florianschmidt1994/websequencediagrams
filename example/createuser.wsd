@@ -1,0 +1,13 @@
+title create user
+
+App -> Api: POST /user with email, fpw,
+Api -> Router: route POST /user
+Router -> UserController: create user
+UserController -> UserController: validate request
+
+alt isValid
+	UserController -> UserController: new User
+	UserController -> Router: next
+else isInvalid
+	UserController -> Api: respond with 400 invalid request
+	Api -> App: 400 invalid request
