@@ -1,6 +1,4 @@
 title Example
-A -> B : text
-B -> A : text
 
 alt text1
     A->B: text

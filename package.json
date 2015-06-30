@@ -4,10 +4,8 @@
   "description": "A simple command line tool to create diagrams",
   "main": "diagrams.js",
   "dependencies": {
-    "async": "^0.9.0",
-    "bluebird": "^2.9.13",
-    "commander": "^2.6.0",
-    "websequencediagrams": "^0.0.2"
+    "websequencediagrams": "^0.0.2",
+    "async": "^0.9.0"
   },
   "devDependencies": {},
   "scripts": {
