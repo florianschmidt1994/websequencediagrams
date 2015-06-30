@@ -73,7 +73,6 @@ function createFileFromSource(folder, fileName) {
         var fileContent = yield fs.readFileAsync(folder+fileName);
         var result = yield wsd.diagramAsync(fileContent, program.theme, 'png');
         var diagramBuffer = result[0];
-        console.log(diagramBuffer);
         return fs.writeFileAsync(folder+fileName.slice(0, fileName.length - '.wsd'.length)+'.png', diagramBuffer, 'binary');
     })();
 }
