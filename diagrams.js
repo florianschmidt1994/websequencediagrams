@@ -1,38 +1,79 @@
-var wsd 	= require('websequencediagrams'),
-fs 			= require('fs');
-async 		= require('async');
-config  	= require('./config');
+'use strict';
 
-var createDiagram = function(file, callback) {
-	
-	async.waterfall([
+var Promise     = require('bluebird'),
+    wsd     = Promise.promisifyAll(require('websequencediagrams')),
+fs          = Promise.promisifyAll(require('fs')),
+async       = require('async'),
+config      = require('./config'),
+program     = require('commander'),
+_           = require('lodash');
 
-		function readDiagramSources(callback) {
-			
-			fs.readFile('data/'+file, 'utf-8', callback);
-		},
 
-		function requestDiagrams(diagSrc, callback) {
-			wsd.diagram(diagSrc, config.style, config.format, callback);
-		}, 
 
-		function createFiles(buf, type) {
-			fs.writeFile('data/'+file.slice(0, file.length - '.wsd'.length)+'.png', buf);
-		}], 
+function *main() {
+    
+    program
+        .version('0.0.1')
+        .usage('[options] <file or folder>')
+        .option('-t, --theme <name>', 'Choose theme out of \'napkin\', \'earth\' (Defaults to napkin)')
+        .parse(process.argv);
 
-		function(err) {
-			if(err) throw err;
-			callback();
-		});	
-};
+    if(program.theme && !(_.contains(['napkin', 'earth'], program.theme))) {
+        program.outputHelp();
+    } else if (!program.theme) program.theme = 'napkin';
 
-async.each(fs.readdirSync('data'), function(file, callback){
-	fileType = file.slice( (file.length - 'wsd'.length), file.length); 
-	if(fileType !== 'wsd') {
-		console.log('Ignoring file: '+file);
-	} else {
-		console.log('creating diagram for: '+file);
-		createDiagram(file, callback);
-	}
-});
+    if(!program.args[0]) {
+        program.outputHelp();
+        process.exit(1);
+    }
+    
+    var mode;
+    
+    try {
+        if(fs.lstatSync(program.args[0]).isFile()) mode = 'file';
+        else if(fs.lstatSync(program.args[0]).isDirectory()) mode = 'directory';
+        else {
+            console.error('cannot read file or folder '+program.args[0]);
+            process.exit(1);
+        }
+    } catch (err) {
+        console.error('cannot read file or folder '+program.args[0]);
+        process.exit(1);
+    }
 
+    var fileNames = [];
+    var folder = '';
+    if(mode === 'file') {
+        folder = __dirname+'/';
+        fileNames = [program.args[0]];
+    } else if(mode === 'directory') {
+        folder = __dirname+'/'+program.args[0]+'/';
+        fileNames = yield fs.readdirAsync(program.args[0]);
+    } 
+
+    yield Promise.each(fileNames, function(fileName) {
+        return createFileFromSource(folder, fileName); 
+    });
+
+    console.log('Done');
+}
+
+(Promise.coroutine(main))();
+
+function createFileFromSource(folder, fileName) {
+    return Promise.coroutine(function *() {
+        var fileType = fileName.slice( (fileName.length - 'wsd'.length), fileName.length); 
+        
+        if(fileType !== 'wsd') {
+            console.log('Ignoring file: '+fileName);
+            return;
+        }
+        
+        console.log('creating diagram for: '+fileName);
+        var fileContent = yield fs.readFileAsync(folder+fileName);
+        var result = yield wsd.diagramAsync(fileContent, program.theme, 'png');
+        var diagramBuffer = result[0];
+        console.log(diagramBuffer);
+        return fs.writeFileAsync(folder+fileName.slice(0, fileName.length - '.wsd'.length)+'.png', diagramBuffer, 'binary');
+    })();
+}

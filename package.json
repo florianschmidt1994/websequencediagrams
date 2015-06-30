@@ -5,7 +5,9 @@
   "main": "diagrams.js",
   "dependencies": {
     "async": "^0.9.0",
+    "bluebird": "^2.9.30",
     "commander": "^2.8.1",
+    "lodash": "^3.9.3",
     "websequencediagrams": "^0.0.2"
   },
   "devDependencies": {},
