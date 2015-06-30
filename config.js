@@ -1,4 +1,4 @@
 module.exports = {
-	style : 'napkin', //other: 
+	style : 'earth', //'napkin', other: napkin, earth
 	format : 'png',
 };
