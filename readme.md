@@ -1,8 +1,8 @@
-#About
+# About
 
 This is a command line tool which uses the API of [websequencediagrams](https://www.websequencediagrams.com) in order to create sequence diagrams out of .wsd files.
 
-Syntax details can be found at https://www.websequencediagrams.com/examples.html
+Syntax details can be found at [https://www.websequencediagrams.com/examples.html](https://www.websequencediagrams.com/examples.html)
 Example content of a .wsd file
 
 ```
@@ -23,9 +23,9 @@ else isInvalid
 
 Results in <img src="https://github.com/florianschmidt1994/websequencediagrams/raw/master/example/createuser.png"/>
 
-#Run
+# Run
 ```
-Usage: diagrams [options] <file or folder>
+Usage: sequencediagrams [options] <file or folder>
     
     Options:
 
@@ -34,5 +34,5 @@ Usage: diagrams [options] <file or folder>
     -t, --theme <name>  Choose theme out of 'napkin', 'earth' (Defaults to napkin)
 ```
 
-##Credits
+# Credits
 Thanks to [hildjj's](https://github.com/hildjj) https://github.com/hildjj/node-websequencediagrams project, which already provides an abstraction around the websequencediagram API
