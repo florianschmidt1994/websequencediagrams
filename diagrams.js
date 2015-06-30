@@ -1,7 +1,7 @@
 var wsd 	= require('websequencediagrams'),
 fs 			= require('fs');
-async 	= require('async');
-config  = require('./config');
+async 		= require('async');
+config  	= require('./config');
 
 var createDiagram = function(file, callback) {
 	
@@ -35,5 +35,4 @@ async.each(fs.readdirSync('data'), function(file, callback){
 		createDiagram(file, callback);
 	}
 });
-
 
