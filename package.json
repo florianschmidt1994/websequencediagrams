@@ -1,5 +1,5 @@
 {
-  "name": "diagrams",
+  "name": "sequencediagrams",
   "version": "0.0.1",
   "description": "A simple command line tool to create diagrams",
   "main": "diagrams.js",
@@ -15,5 +15,20 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Florian Schmidt",
-  "license": "none"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/florianschmidt1994/websequencediagrams.git"
+  },
+  "keywords": [
+    "websequencediagrams",
+    "sequencediagrams",
+    "es6",
+    "promises",
+    "diagrams"
+  ],
+  "bugs": {
+    "url": "https://github.com/florianschmidt1994/websequencediagrams/issues"
+  },
+  "homepage": "https://github.com/florianschmidt1994/websequencediagrams#readme"
 }
