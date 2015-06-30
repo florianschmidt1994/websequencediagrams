@@ -1,6 +1,6 @@
 {
   "name": "sequencediagrams",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple command line tool to create diagrams",
   "main": "lib/index.js",
   "dependencies": {
@@ -13,6 +13,9 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin" : {
+    "sequencediagrams" : "./lib/index.js"
   },
   "author": "Florian Schmidt",
   "license": "MIT",
