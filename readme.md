@@ -1,7 +1,3 @@
-#Warning
-
-This package uses ES6 generators, so make sure to either use io.js or nodes harmony flags!
-
 # About
 
 This is a command line tool which uses the API of [websequencediagrams](https://www.websequencediagrams.com) in order to create sequence diagrams out of .wsd files.
@@ -30,7 +26,7 @@ Results in <img src="https://github.com/florianschmidt1994/websequencediagrams/r
 # Run
 ```
 Usage: sequencediagrams [options] <file or folder>
-    
+
     Options:
 
     -h, --help          output usage information
